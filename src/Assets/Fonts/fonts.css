@@ -1,0 +1,139 @@
+@font-face {
+    font-family: 'Nexa';
+    src: url('NexaBold.eot');
+    src: url('NexaBold.eot?#iefix') format('embedded-opentype'),
+        url('NexaBold.woff2') format('woff2'),
+        url('NexaBold.woff') format('woff'),
+        url('NexaBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'A Love of Thunder';
+    src: url('ALoveofThunder.eot');
+    src: url('ALoveofThunder.eot?#iefix') format('embedded-opentype'),
+        url('ALoveofThunder.woff2') format('woff2'),
+        url('ALoveofThunder.woff') format('woff'),
+        url('ALoveofThunder.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jostmed';
+    src: url('Jost-Medium.eot');
+    src: url('Jost-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Medium.woff2') format('woff2'),
+        url('Jost-Medium.woff') format('woff'),
+        url('Jost-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jostlight';
+    src: url('Jost-Light.eot');
+    src: url('Jost-Light.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Light.woff2') format('woff2'),
+        url('Jost-Light.woff') format('woff'),
+        url('Jost-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jostbook';
+    src: url('Jost-Book.eot');
+    src: url('Jost-Book.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Book.woff2') format('woff2'),
+        url('Jost-Book.woff') format('woff'),
+        url('Jost-Book.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jostxlight';
+    src: url('Jost-Hairline.eot');
+    src: url('Jost-Hairline.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Hairline.woff2') format('woff2'),
+        url('Jost-Hairline.woff') format('woff'),
+        url('Jost-Hairline.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jostthin';
+    src: url('Jost-Thin.eot');
+    src: url('Jost-Thin.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Thin.woff2') format('woff2'),
+        url('Jost-Thin.woff') format('woff'),
+        url('Jost-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jostblack';
+    src: url('Jost-Black.eot');
+    src: url('Jost-Black.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Black.woff2') format('woff2'),
+        url('Jost-Black.woff') format('woff'),
+        url('Jost-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jostheavy';
+    src: url('Jost-Heavy.eot');
+    src: url('Jost-Heavy.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Heavy.woff2') format('woff2'),
+        url('Jost-Heavy.woff') format('woff'),
+        url('Jost-Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jostbold';
+    src: url('Jost-Bold.eot');
+    src: url('Jost-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Bold.woff2') format('woff2'),
+        url('Jost-Bold.woff') format('woff'),
+        url('Jost-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Jostsemi';
+    src: url('Jost-Semi.eot');
+    src: url('Jost-Semi.eot?#iefix') format('embedded-opentype'),
+        url('Jost-Semi.woff2') format('woff2'),
+        url('Jost-Semi.woff') format('woff'),
+        url('Jost-Semi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FontAwesomesolid';
+    src: url('Font-Awesome-Solid-900.otf');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+

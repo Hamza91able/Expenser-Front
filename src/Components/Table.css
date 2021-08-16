@@ -1,0 +1,56 @@
+td {
+  padding: 20px !important;
+  text-align: center;
+}
+
+table {
+  border-spacing: 0 26px;
+}
+
+/* clears the ‘X’ from Internet Explorer */
+input[type="search"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+/* clears the ‘X’ from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+.user-menu .MuiList-padding {
+  padding: 0 !important;
+}
+
+.swal2-confirm {
+  width: 100px;
+  border-radius: 30px !important;
+  background-color: #8950a3 !important;
+  font-weight: bold !important;
+}
+
+.swal2-cancel {
+  width: 90px;
+  border-radius: 30px !important;
+  background-color: #48105b !important;
+  color: white;
+}
+
+.swal2-html-container {
+  color: #48105b;
+  font-weight: bold;
+}
+
+.swal2-title {
+  color: #48105b !important;
+  font-weight: bold;
+  text-transform: uppercase !important;
+}
