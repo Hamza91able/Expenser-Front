@@ -33,3 +33,14 @@ export const getMonthlyAndAvgMonthly = () => {
     },
   });
 };
+
+export const getMonthDebitCredit = () => {
+  const Token = localStorage.getItem("Token");
+  return axios({
+    url: `${connection_string}/home/avg-dual`,
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${Token}`,
+    },
+  });
+};

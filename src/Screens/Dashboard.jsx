@@ -6,6 +6,7 @@ import MultiGraph from "../Components/MultiGraph";
 import { useQuery } from "react-query";
 import {
   getCurrentMonthsExpense,
+  getMonthDebitCredit,
   getMonthlyAndAvgMonthly,
   getTodaysExpense,
 } from "../Apis";
@@ -83,6 +84,11 @@ function Dashboard(props) {
     data: monthly_and_avg_monthly,
     isLoading: monthly_and_avg_monthly_loading,
   } = useQuery("monthly_and_avg_monthly", getMonthlyAndAvgMonthly);
+
+  const {
+    data: month_debit_credit,
+    isLoading: month_debit_credit_loading,
+  } = useQuery("get_month_debit_credit", getMonthDebitCredit);
 
   return (
     <>
@@ -216,7 +222,7 @@ function Dashboard(props) {
             Income/Outcome Graph
           </Typography>
           <Container maxWidth="lg">
-            <MultiGraph />
+            <MultiGraph month_debit_credit={month_debit_credit?.data?.arr} />
           </Container>
         </Grid>
       </Paper>
