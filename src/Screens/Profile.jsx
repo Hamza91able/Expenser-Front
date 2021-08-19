@@ -50,8 +50,11 @@ const useStyles = makeStyles((theme) => ({
     outline: "none",
     paddingLeft: 11,
     marginLeft: 10,
-    width: "100%",
+    width: "86%",
     marginTop: 10,
+    [theme.breakpoints.up("sm")]: {
+      width: "100%",
+    },
   },
   categoryHeading: {
     color: "#48105b",
@@ -65,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #8950a3",
     fontWeight: "bold",
     borderRadius: 50,
-    width: 117,
+    width: 200,
     marginLeft: 10,
     marginTop: 30,
     "&:hover": {
@@ -96,7 +99,7 @@ function Profile({ history }) {
     name: "",
     salary: "",
     goal: "",
-    balance: ""
+    balance: "",
   });
   const [user, setUser] = useRecoilState(userState);
 
@@ -201,7 +204,7 @@ function Profile({ history }) {
             </Button>
           ) : (
             <Button className={addBtn} onClick={() => mutate(data)}>
-              ADD
+              Update Profile
             </Button>
           )}
         </Container>

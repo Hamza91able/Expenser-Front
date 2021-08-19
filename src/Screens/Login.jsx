@@ -162,7 +162,8 @@ function Login({ setLogged_in }) {
       retry: false,
       onSuccess: (res) => {
         localStorage.setItem("Token", res.data.token);
-        setLogged_in(true);
+        window.location.reload();
+        // setLogged_in(true);
       },
       onError: (err) => Error(err?.response?.data?.message),
     }

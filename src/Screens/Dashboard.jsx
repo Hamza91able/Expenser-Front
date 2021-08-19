@@ -13,6 +13,7 @@ import {
 import { userState } from "../Recoil/Auth";
 import { useRecoilValue } from "recoil";
 import { formatter } from "../Utils/numberFormatter";
+import StatCard from "../Components/StatCard";
 
 const useStyles = makeStyles((theme) => ({
   mainPaper: {
@@ -91,124 +92,88 @@ function Dashboard(props) {
   return (
     <>
       <Paper className={mainPaper}>
-        <Typography className={mainHeading}>QUICK STATS</Typography>
+        <Typography className={mainHeading} style={{ marginBottom: 30 }}>
+          QUICK STATS
+        </Typography>
         <Grid container spacing={3}>
           <Grid item md={4} xs={12}>
-            <Paper className={statsCard} elevation={3}>
-              <Grid container>
-                <Grid item xs={12} className={center}>
-                  <Avatar className={statsAvatarYear}>
-                    {user?.salary ? formatter.format(user?.salary) : 0}
-                  </Avatar>
-                </Grid>
-                <Grid item xs={12} className={center} style={{ marginTop: 20 }}>
-                  <Typography className={incomeText}>Monthly Salary</Typography>
-                </Grid>
-              </Grid>
-            </Paper>
+            <StatCard
+              text="Monthly Salary"
+              data={user?.salary ? formatter.format(user?.salary) : 0}
+              color="mdl-color--purple"
+              icon="monetization_on"
+            />
           </Grid>
           <Grid item md={4} xs={12}>
-            <Paper className={statsCard} elevation={3}>
-              <Grid container>
-                <Grid item xs={12} className={center}>
-                  <Avatar className={statsAvatarYear}>
-                    {user?.goal ? formatter.format(user?.goal) : 0}
-                  </Avatar>
-                </Grid>
-                <Grid item xs={12} className={center} style={{ marginTop: 20 }}>
-                  <Typography className={incomeText}>Yearly Goal</Typography>
-                </Grid>
-              </Grid>
-            </Paper>
+            <StatCard
+              text="Yearly Goal"
+              data={user?.goal ? formatter.format(user?.goal) : 0}
+              color="mdl-color--blue-700"
+              icon="attach_money"
+            />
           </Grid>
           <Grid item md={4} xs={12}>
-            <Paper className={statsCard} elevation={3}>
-              <Grid container>
-                <Grid item xs={12} className={center}>
-                  <Avatar className={statsAvatarYear}>
-                    {monthly_expense?.data?.result[0]?.price
-                      ? formatter.format(
-                          monthly_expense?.data?.result[0]?.price
-                        )
-                      : 0}
-                  </Avatar>
-                </Grid>
-                <Grid item xs={12} className={center} style={{ marginTop: 20 }}>
-                  <Typography className={incomeText}>
-                    Current Month's Expense
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
+            <StatCard
+              text="Current Month's Expense"
+              data={
+                monthly_expense?.data?.result[0]?.price
+                  ? formatter.format(monthly_expense?.data?.result[0]?.price)
+                  : 0
+              }
+              color="mdl-color--red-700"
+              icon="money_off"
+            />
           </Grid>
 
           <Grid item md={4} xs={12}>
-            <Paper className={statsCard} elevation={3}>
-              <Grid container>
-                <Grid item xs={12} className={center}>
-                  <Avatar className={statsAvatarYear}>
-                    {today_expense?.data?.result[0]?.price
-                      ? formatter.format(today_expense?.data?.result[0]?.price)
-                      : 0}
-                  </Avatar>
-                </Grid>
-                <Grid item xs={12} className={center} style={{ marginTop: 20 }}>
-                  <Typography className={incomeText}>
-                    Today's Expense
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
+            <StatCard
+              text="Today's Expense"
+              data={
+                today_expense?.data?.result[0]?.price
+                  ? formatter.format(today_expense?.data?.result[0]?.price)
+                  : 0
+              }
+              color="mdl-color--orange-700"
+              icon="account_balance_wallet"
+            />
           </Grid>
           <Grid item md={4} xs={12}>
-            <Paper className={statsCard} elevation={3}>
-              <Grid container>
-                <Grid item xs={12} className={center}>
-                  <Avatar
-                    className={statsAvatarYear}
-                    style={{
-                      color: monthly_and_avg_monthly?.data?.is_achivable
-                        ? "light green"
-                        : "red",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {monthly_and_avg_monthly?.data?.is_achivable
-                      ? "Achivable"
-                      : "Not Achivable"}
-                  </Avatar>
-                </Grid>
-                <Grid item xs={12} className={center} style={{ marginTop: 20 }}>
-                  <Typography className={incomeText}>
-                    Current Goal Estimation
-                    {!monthly_and_avg_monthly?.data?.is_achivable &&
-                      monthly_and_avg_monthly?.data?.short && (
-                        <div style={{ textAlign: "center" }}>
-                          Short By: {monthly_and_avg_monthly?.data?.short}
-                        </div>
-                      )}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
+            <StatCard
+              text="Current Goal Estimation"
+              extra={
+                !monthly_and_avg_monthly?.data?.is_achivable &&
+                monthly_and_avg_monthly?.data?.short && (
+                  <div>
+                    Short By:{" "}
+                    {formatter.format(monthly_and_avg_monthly?.data?.short)}
+                  </div>
+                )
+              }
+              data={
+                monthly_and_avg_monthly?.data?.is_achivable
+                  ? "Achivable"
+                  : "Not Achivable"
+              }
+              color="mdl-color--darkblack-700"
+              icon="account_balance"
+              secondaryColor={
+                monthly_and_avg_monthly?.data?.is_achivable
+                  ? "#B4FEE7"
+                  : "#B80454"
+              }
+            />
           </Grid>
           <Grid item md={4} xs={12}>
-            <Paper className={statsCard} elevation={3}>
-              <Grid container>
-                <Grid item xs={12} className={center}>
-                  <Avatar className={statsAvatarYear}>
-                    {monthly_and_avg_monthly?.data?.avg
-                      ? formatter.format(monthly_and_avg_monthly?.data?.avg)
-                      : 0}
-                  </Avatar>
-                </Grid>
-                <Grid item xs={12} className={center} style={{ marginTop: 20 }}>
-                  <Typography className={incomeText}>
-                    Average Monthly Expense
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
+            <StatCard
+              text="Average Monthly Expense"
+              data={
+                monthly_and_avg_monthly?.data?.avg
+                  ? formatter.format(monthly_and_avg_monthly?.data?.avg)
+                  : 0
+              }
+              color="mdl-color--purple-700"
+              icon="summarize"
+            />
           </Grid>
           <Typography className={mainHeading} style={{ marginTop: 30 }}>
             Monthly Expense Graph

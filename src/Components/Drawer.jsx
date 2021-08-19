@@ -13,9 +13,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import DescriptionIcon from "@material-ui/icons/Description";
 
-import { Avatar, ListItemAvatar } from "@material-ui/core";
+import { ListItemAvatar } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -27,7 +26,6 @@ import Dashboard from "../Screens/Dashboard";
 import Ledger from "../Screens/Ledger";
 import AddExpense from "../Screens/AddExpense";
 import { Route, withRouter } from "react-router-dom";
-import Logo from "../Assets/Images/logo.png";
 import Profile from "../Screens/Profile";
 import { useRecoilValue } from "recoil";
 import { userState } from "../Recoil/Auth";
@@ -52,12 +50,12 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 9999,
     display: "flex",
     justifyContent: "center",
-    backgroundColor: "#1f2937",
+    backgroundColor: "#0e1726",
     boxShadow: "none",
     [theme.breakpoints.up("sm")]: {
       height: 119,
     },
-    height: 75,
+    height: 65,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -70,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
-    background: "#1f2937",
+    background: "#0e1726",
   },
   content: {
     flexGrow: 1,
@@ -81,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     height: 46,
   },
   listStyle: {
-    background: "#1f2937",
+    background: "#0e1726",
     color: "white",
     height: "100%",
   },
@@ -267,6 +265,30 @@ function MainDrawer(props) {
             }
           />
         </ListItem>
+        <ListItem
+          onClick={() => {
+            localStorage.clear();
+            props.setLogged_in(false);
+            window.location.reload();
+          }}
+          button
+          className={`${classes.hoverItem} ${classes.showMobile} ${
+            routes?.profile ? classes.selected : null
+          }`}
+          style={{ color: "#d32f2f" }}
+        >
+          <ListItemIcon className={classes.listItemIcon}>
+            <ExitToAppIcon
+              className={classes.listIconStyle}
+              style={{ color: "#d32f2f" }}
+            />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <Typography className={classes.menuTypography}>Logout</Typography>
+            }
+          />
+        </ListItem>
       </List>
     </div>
   );
@@ -293,7 +315,7 @@ function MainDrawer(props) {
             style={{
               fontWeight: "900",
               color: "#fff",
-              fontSize: 42,
+              fontSize: 32,
               cursor: "pointer",
             }}
             onClick={() => {
