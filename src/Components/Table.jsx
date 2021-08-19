@@ -11,6 +11,10 @@ import {
 import Select from "@material-ui/core/Select";
 import DatePicker from "react-datepicker";
 import { useDebouncedEffect } from "./useDebounceEffect";
+import moment from "moment";
+import MobileLedgerCard from "./MobileLedgerCard";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 
 const useStyles = makeStyles((theme) => ({
   ul: {
@@ -75,6 +79,18 @@ const useStyles = makeStyles((theme) => ({
   item: {
     padding: 0,
   },
+  mobileMargin: {
+    [theme.breakpoints.up("sm")]: {
+      marginTop: 0,
+    },
+    marginTop: 30,
+  },
+  hideMobile: {
+    [theme.breakpoints.up("sm")]: {
+      display: "inline-table",
+    },
+    display: "none",
+  },
 }));
 
 function Table({
@@ -126,10 +142,7 @@ function Table({
                 selected={to}
               />
             </Grid>
-            <Grid item xs={12} md={3}>
-              <Button className={applyBtn}>APPLY/CLEAR</Button>
-            </Grid>
-            <Grid item xs={12} md={3} style={{ marginTop: 20 }}>
+            <Grid item xs={12} md={3} className={classes.mobileMargin}>
               <InputLabel id="demo-simple-select-label">Select Type</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -166,21 +179,34 @@ function Table({
               </Select>{" "}
               Entries
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} className={classes.mobileMargin}>
               <label className={searchBar}>
-                Search:
                 <input
                   type="search"
                   placeholder="Search"
                   className={searchBarInput}
                   onChange={(e) => setInternalSearch(e.target.value)}
                   value={internal_search}
+                  autoComplete="off"
                 />
               </label>
             </Grid>
           </Grid>
         </Typography>
-        <table style={{ width: "100%" }}>
+        {data?.map((data) => (
+          <MobileLedgerCard
+            name={data?.name}
+            price={data?.price}
+            ledger_type={data?.ledger_type}
+            date={moment(data?.date).format("LL | hh:mm A")}
+            note={
+              data?.note?.length > 30
+                ? `${data?.note?.substring(0, 25)}....`
+                : data?.note
+            }
+          />
+        ))}
+        <table style={{ width: "100%" }} className={classes.hideMobile}>
           <thead>
             <tr role="row">
               {headings?.map((heading) => (
@@ -207,10 +233,34 @@ function Table({
                   boxShadow: "1px 1px 13px #c8c8c8",
                 }}
               >
-                <td>{data?.name}</td>
-                <td>Rs. {data?.price}</td>
-                <td>{data?.ledger_type}</td>
-                <td>{data?.createdAt}</td>
+                <td style={{ fontWeight: "bold" }}>{data?.name}</td>
+                <td>
+                  <Button
+                    disableRipple={true}
+                    disabled
+                    endIcon={
+                      data?.ledger_type === "Debit" ? (
+                        <ArrowDropDownIcon />
+                      ) : (
+                        <ArrowDropUpIcon />
+                      )
+                    }
+                    style={{
+                      color: data?.ledger_type === "Debit" ? "red" : "#017f51",
+                    }}
+                  >
+                    Rs.{data?.price}
+                  </Button>
+                </td>
+                <td
+                  style={{
+                    color: data?.ledger_type === "Debit" ? "red" : "#017f51",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {data?.ledger_type}
+                </td>
+                <td>{moment(data?.date).format("LL | hh:mm A")}</td>
                 <td>
                   {data?.note?.length > 30
                     ? `${data?.note?.substring(0, 25)}....`

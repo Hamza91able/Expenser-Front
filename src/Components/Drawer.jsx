@@ -31,6 +31,10 @@ import Logo from "../Assets/Images/logo.png";
 import Profile from "../Screens/Profile";
 import { useRecoilValue } from "recoil";
 import { userState } from "../Recoil/Auth";
+import { useEffect } from "react";
+import HomeIcon from "@material-ui/icons/Home";
+import BarChartIcon from "@material-ui/icons/BarChart";
+import PersonIcon from "@material-ui/icons/Person";
 
 const drawerWidth = 260;
 
@@ -45,12 +49,15 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
-    height: 119,
     zIndex: 9999,
     display: "flex",
     justifyContent: "center",
     backgroundColor: "#1f2937",
     boxShadow: "none",
+    [theme.breakpoints.up("sm")]: {
+      height: 119,
+    },
+    height: 75,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -93,6 +100,7 @@ const useStyles = makeStyles((theme) => ({
     height: 59,
     "&:hover": {
       backgroundColor: "#8950a3",
+      color: "white",
     },
   },
   notificationItem: {
@@ -138,6 +146,11 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  showMobile: {
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
 }));
 
 function MainDrawer(props) {
@@ -149,7 +162,8 @@ function MainDrawer(props) {
   const [anchorElNotification, setAnchorElNotification] = React.useState(null);
   const [routes, setRoutes] = React.useState({
     dashboard: true,
-    newsletters: false,
+    ledger: false,
+    profile: false,
   });
   const user = useRecoilValue(userState);
 
@@ -177,6 +191,13 @@ function MainDrawer(props) {
     setRoutes(setRoutes);
   };
 
+  useEffect(() => {
+    if (props.location.pathname === "/") handleRoutes("dashboard");
+    else if (props.location.pathname === "/ledger") handleRoutes("ledger");
+    else if (props.location.pathname === "/profile") handleRoutes("profile");
+    else handleRoutes("");
+  }, [props?.location?.pathname]);
+
   const drawer = (
     <div className={classes.listStyle}>
       <div className={classes.toolbar} />
@@ -190,10 +211,11 @@ function MainDrawer(props) {
           onClick={() => {
             props.history.push("/");
             handleRoutes("dashboard");
+            setMobileOpen(false);
           }}
         >
           <ListItemIcon className={classes.listItemIcon}>
-            <MenuIcon className={classes.listIconStyle} />
+            <HomeIcon className={classes.listIconStyle} />
           </ListItemIcon>
           <ListItemText
             primary={
@@ -206,19 +228,42 @@ function MainDrawer(props) {
         <ListItem
           onClick={() => {
             props.history.push("/ledger");
-            handleRoutes("newsletters");
+            handleRoutes("ledger");
+            setMobileOpen(false);
           }}
           button
           className={`${classes.hoverItem} ${
-            routes?.newsletters ? classes.selected : null
+            routes?.ledger ? classes.selected : null
           }`}
         >
           <ListItemIcon className={classes.listItemIcon}>
-            <DescriptionIcon className={classes.listIconStyle} />
+            <BarChartIcon className={classes.listIconStyle} />
           </ListItemIcon>
           <ListItemText
             primary={
               <Typography className={classes.menuTypography}>LEDGER</Typography>
+            }
+          />
+        </ListItem>
+        <ListItem
+          onClick={() => {
+            props.history.push("/profile");
+            handleRoutes("profile");
+            setMobileOpen(false);
+          }}
+          button
+          className={`${classes.hoverItem} ${classes.showMobile} ${
+            routes?.profile ? classes.selected : null
+          }`}
+        >
+          <ListItemIcon className={classes.listItemIcon}>
+            <PersonIcon className={classes.listIconStyle} />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <Typography className={classes.menuTypography}>
+                Profile
+              </Typography>
             }
           />
         </ListItem>
@@ -414,7 +459,7 @@ function MainDrawer(props) {
           </Drawer>
         </Hidden>
       </nav>
-      <main className={classes.content}>
+      <main className={classes.content} style={{ width: "100vw" }}>
         <div className={classes.toolbar} />
         <div className={classes.toolbar} />
         <Route path="/" exact render={(props) => <Dashboard {...props} />} />

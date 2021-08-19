@@ -55,8 +55,11 @@ const useStyles = makeStyles((theme) => ({
     outline: "none",
     paddingLeft: 11,
     marginLeft: 10,
-    width: "100%",
+    width: "86%",
     marginTop: 10,
+    [theme.breakpoints.up("sm")]: {
+      width: "100%",
+    },
   },
   categoryHeading: {
     color: "#48105b",
@@ -113,7 +116,6 @@ function AddExpense({ history }) {
       [e.target.name]: e.target.value,
     });
   };
-
   const { mutate, isLoading } = useMutation((data) => addExpense(data), {
     onSuccess: (res) => {
       if (res?.data?.balance) setUser({ ...user, balance: res?.data?.balance });
@@ -151,6 +153,7 @@ function AddExpense({ history }) {
                 name="name"
                 value={data?.name}
                 onChange={handleChange}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
@@ -163,6 +166,7 @@ function AddExpense({ history }) {
                 name="price"
                 value={data?.price}
                 onChange={handleChange}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
@@ -175,6 +179,7 @@ function AddExpense({ history }) {
                 name="date"
                 value={data?.date}
                 onChange={handleChange}
+                autoComplete="off"
               />
             </Grid>
           </Grid>
@@ -234,6 +239,7 @@ function AddExpense({ history }) {
                 name="note"
                 value={data?.note}
                 onChange={handleChange}
+                autoComplete="off"
               />
             </Grid>
           </Grid>

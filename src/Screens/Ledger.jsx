@@ -79,7 +79,7 @@ function Ledger(props) {
   const [perPage, setPerPage] = useState(10);
   const [ledger_type, setType] = useState("");
 
-  const { isFetching, isLoading, data, refetch } = useQuery(
+  const { isLoading, data } = useQuery(
     ["ledger", page, perPage, search_string, from, to, ledger_type],
     () => getLedger(page, perPage, search_string, from, to, ledger_type),
     { keepPreviousData: true }
@@ -108,7 +108,7 @@ function Ledger(props) {
             ADD
           </Button>
         </Typography>
-        <Typography className={secondHeading}>USER LISTING</Typography>
+        <Typography className={secondHeading}>LEDGER LISTING</Typography>
         <Container
           maxWidth="lg"
           style={{ marginTop: 30 }}
@@ -142,8 +142,8 @@ function Ledger(props) {
                 setType={setType}
               />
               <Grid container>
-                <Grid item xs={6}></Grid>
-                <Grid item xs={6}>
+                <Grid item xs={0} md={6}></Grid>
+                <Grid item xs={12} md={6}>
                   <Pagination
                     page={page}
                     pageCount={data?.data?.ledger?.totalPages}

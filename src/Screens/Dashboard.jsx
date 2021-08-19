@@ -85,10 +85,8 @@ function Dashboard(props) {
     isLoading: monthly_and_avg_monthly_loading,
   } = useQuery("monthly_and_avg_monthly", getMonthlyAndAvgMonthly);
 
-  const {
-    data: month_debit_credit,
-    isLoading: month_debit_credit_loading,
-  } = useQuery("get_month_debit_credit", getMonthDebitCredit);
+  const { data: month_debit_credit, isLoading: month_debit_credit_loading } =
+    useQuery("get_month_debit_credit", getMonthDebitCredit);
 
   return (
     <>
