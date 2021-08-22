@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
   mainPaper: {
     borderRadius: 30,
     padding: 30,
+    [theme.breakpoints.up("md")]: {
+      maxWidth: "calc(100vw - 350px)",
+    },
+    maxWidth: "100vw",
   },
   mainHeading: {
     fontWeight: "bold",
