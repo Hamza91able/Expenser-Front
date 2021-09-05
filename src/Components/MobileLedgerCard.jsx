@@ -73,7 +73,7 @@ export default function MobileLedgerCard({
             marginLeft: -8,
           }}
         >
-          Rs.{price}
+          {price}
         </Button>
         <Typography
           variant="subtitle2"

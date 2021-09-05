@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import ReactPaginate from "react-paginate";
 
 export default function Pagination({ page, pageCount, setPage }) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page]);
+
   return (
     <ReactPaginate
       previousLabel={"«"}

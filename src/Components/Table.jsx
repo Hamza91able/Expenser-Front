@@ -15,6 +15,7 @@ import moment from "moment";
 import MobileLedgerCard from "./MobileLedgerCard";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+import { formatter } from "../Utils/numberFormatter";
 
 const useStyles = makeStyles((theme) => ({
   ul: {
@@ -196,7 +197,7 @@ function Table({
         {data?.map((data) => (
           <MobileLedgerCard
             name={data?.name}
-            price={data?.price}
+            price={formatter.format(data?.price)}
             ledger_type={data?.ledger_type}
             date={moment(data?.date).format("LL | hh:mm A")}
             note={
@@ -249,7 +250,7 @@ function Table({
                       color: data?.ledger_type === "Debit" ? "red" : "#017f51",
                     }}
                   >
-                    Rs.{data?.price}
+                    {formatter.format(data?.price)}
                   </Button>
                 </td>
                 <td
