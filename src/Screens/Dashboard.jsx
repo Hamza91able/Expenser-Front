@@ -6,6 +6,7 @@ import MultiGraph from "../Components/MultiGraph";
 import { useQuery } from "react-query";
 import {
   getCurrentMonthsExpense,
+  getDailyExpense,
   getMonthDebitCredit,
   getMonthlyAndAvgMonthly,
   getTodaysExpense,
@@ -14,6 +15,7 @@ import { userState } from "../Recoil/Auth";
 import { useRecoilValue } from "recoil";
 import { formatter } from "../Utils/numberFormatter";
 import StatCard from "../Components/StatCard";
+import LineChart from "../Components/LineGraph";
 
 const useStyles = makeStyles((theme) => ({
   mainPaper: {
@@ -67,14 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Dashboard(props) {
   const classes = useStyles();
-  const {
-    mainPaper,
-    mainHeading,
-    statsAvatarYear,
-    statsCard,
-    center,
-    incomeText,
-  } = classes;
+  const { mainPaper, mainHeading } = classes;
   const user = useRecoilValue(userState);
 
   const { data: monthly_expense, isLoading: monthly_expense_loading } =
@@ -92,6 +87,11 @@ function Dashboard(props) {
 
   const { data: month_debit_credit, isLoading: month_debit_credit_loading } =
     useQuery("get_month_debit_credit", getMonthDebitCredit);
+
+  const { data: daily_expense, isLoading: daily_expense_loading } = useQuery(
+    "daily_expense",
+    getDailyExpense
+  );
 
   return (
     <>
@@ -192,6 +192,12 @@ function Dashboard(props) {
             <MultiGraph month_debit_credit={month_debit_credit?.data?.arr} />
           </Container>
         </Grid>
+        <Typography className={mainHeading} style={{ marginTop: 60 }}>
+          Daily Graph
+        </Typography>
+        <Container maxWidth="lg">
+          <LineChart daily_expense={daily_expense?.data?.expenseCount} />
+        </Container>
       </Paper>
     </>
   );
