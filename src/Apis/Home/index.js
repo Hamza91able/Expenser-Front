@@ -45,11 +45,14 @@ export const getMonthDebitCredit = () => {
   });
 };
 
-export const getDailyExpense = () => {
+export const getDailyExpense = (month) => {
   const Token = localStorage.getItem("Token");
   return axios({
     url: `${connection_string}/home/daily-expense`,
     method: "GET",
+    params: {
+      month,
+    },
     headers: {
       Authorization: `Bearer ${Token}`,
     },

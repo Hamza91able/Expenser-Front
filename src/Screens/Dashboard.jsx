@@ -1,4 +1,11 @@
-import { Avatar, Container, Grid, Paper, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  CircularProgress,
+  Container,
+  Grid,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import RevenueGraph from "../Components/RevenueGraph";
@@ -16,6 +23,12 @@ import { useRecoilValue } from "recoil";
 import { formatter } from "../Utils/numberFormatter";
 import StatCard from "../Components/StatCard";
 import LineChart from "../Components/LineGraph";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   mainPaper: {
@@ -65,12 +78,21 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 18,
     fontFamily: "jostmed !important",
   },
+  formControl: {
+    float: "unset",
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      float: "right",
+      width: 400,
+    },
+  },
 }));
 
 function Dashboard(props) {
   const classes = useStyles();
   const { mainPaper, mainHeading } = classes;
   const user = useRecoilValue(userState);
+  const [month, setMonth] = useState(new Date().getMonth());
 
   const { data: monthly_expense, isLoading: monthly_expense_loading } =
     useQuery("monthly_expense", getCurrentMonthsExpense);
@@ -89,8 +111,8 @@ function Dashboard(props) {
     useQuery("get_month_debit_credit", getMonthDebitCredit);
 
   const { data: daily_expense, isLoading: daily_expense_loading } = useQuery(
-    "daily_expense",
-    getDailyExpense
+    ["daily_expense", month],
+    () => getDailyExpense(month)
   );
 
   return (
@@ -194,10 +216,43 @@ function Dashboard(props) {
         </Grid>
         <Typography className={mainHeading} style={{ marginTop: 60 }}>
           Daily Graph
+          <FormControl variant="filled" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-filled-label">
+              Select Month
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+              value={month}
+              onChange={(e) => setMonth(e.target.value)}
+            >
+              <MenuItem value="">
+                <em>All Year</em>
+              </MenuItem>
+              {[
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ].map((month, index) => (
+                <MenuItem value={index}>{month}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Typography>
-        <Container maxWidth="lg">
+        {daily_expense_loading ? (
+          <CircularProgress />
+        ) : (
           <LineChart daily_expense={daily_expense?.data?.expenseCount} />
-        </Container>
+        )}
       </Paper>
     </>
   );

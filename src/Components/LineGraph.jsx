@@ -36,7 +36,7 @@ const LineChart = ({ daily_expense }) => {
       const labels = [];
       const data_expense = [];
       daily_expense.forEach((expense) => {
-        labels.push(moment(expense.first).format("dddd | MMMM/DD"));
+        labels.push(moment(expense.first).format("MMMM-DD"));
         data_expense.push(expense.price);
       });
       _data.labels = labels;
